@@ -41,7 +41,7 @@ registerForm.addEventListener("submit", async (event) =>{
     };
     console.log(employeeDetails);
 
-    const response = await fetch("http://localhost:3500/register", {
+    const response = await fetch("https://employee-registration-backend-sigma.vercel.app/register", {
         method: "POST",
         headers: {
             "content-Type": "application/json",
@@ -75,7 +75,7 @@ loginForm.addEventListener("submit", async (event) => {
         password: loginPassword.value
     };
 
-    const response = await fetch("http://localhost:3500/login", {
+    const response = await fetch("https://employee-registration-backend-sigma.vercel.app/login", {
         method: "POST",
         headers: {
             "content-Type": "application/json",
