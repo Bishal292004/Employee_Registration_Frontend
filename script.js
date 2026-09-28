@@ -1,19 +1,34 @@
 const loginBox = document.getElementById("loginBox");
 const registerBox = document.getElementById("registerBox");
+const dashboardBox = document.getElementById("dashboardBox");
+const registrationSuccessBox = document.getElementById("registrationSuccessBox");
 
 const showRegister = document.getElementById("showRegister");
 const showLogin = document.getElementById("showLogin");
 
+function showView(view) {
+  [loginBox, registerBox, dashboardBox, registrationSuccessBox].forEach((box) => {
+    box.classList.add("hidden");
+  });
+  view.classList.remove("hidden");
+}
+
 // Show Registration form
 showRegister.addEventListener("click", function () {
-  loginBox.classList.add("hidden");
-  registerBox.classList.remove("hidden");
+  showView(registerBox);
 });
 
 // Show Login form
 showLogin.addEventListener("click", function () {
-  registerBox.classList.add("hidden");
-  loginBox.classList.remove("hidden");
+  showView(loginBox);
+});
+
+document.getElementById("returnToLogin").addEventListener("click", function () {
+  showView(loginBox);
+});
+
+document.getElementById("logoutButton").addEventListener("click", function () {
+  showView(loginBox);
 });
 
 //Employee registration
@@ -37,7 +52,6 @@ registerForm.addEventListener("submit", async (event) => {
     gender: gender.value,
     password: password.value,
   };
-  console.log(employeeDetails);
 
   try {
     const response = await fetch(
@@ -52,12 +66,16 @@ registerForm.addEventListener("submit", async (event) => {
     );
 
     const data = await response.json();
-    console.log(data);
     if (data.success === true) {
-      registerMessage.innerText = "Registration Successful.";
+      document.getElementById("successName").textContent = employeeDetails.name;
+      document.getElementById("successEmail").textContent = employeeDetails.email;
+      document.getElementById("successPhone").textContent = employeeDetails.phone;
+      document.getElementById("successDob").textContent = employeeDetails.dob;
+      document.getElementById("successGender").textContent = employeeDetails.gender;
       registerForm.reset();
+      showView(registrationSuccessBox);
     } else {
-      registerMessage.innerText = data.message;
+      registerMessage.innerText = data.message || "Registration failed.";
     }
   } catch (error) {
     console.error("Registration error:", error);
@@ -93,12 +111,12 @@ loginForm.addEventListener("submit", async (event) => {
     );
 
     const data = await response.json();
-    console.log(data);
     if (data.success === true) {
-      loginMessage.innerText = "Login Successful.";
+      document.getElementById("dashboardEmail").textContent = loginData.email;
       loginForm.reset();
+      showView(dashboardBox);
     } else {
-      loginMessage.innerText = data.message;
+      loginMessage.innerText = data.message || "Login failed.";
     }
     
   } catch (error) {

@@ -114,6 +114,40 @@ body {
     font-weight: bold;
 }
 
+.employee-details {
+    margin: 4px 0 24px;
+}
+
+.detail-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 13px 0;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.detail-label {
+    color: #64748b;
+    font-size: 14px;
+}
+
+.detail-value {
+    color: #1e293b;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: right;
+    overflow-wrap: anywhere;
+}
+
+.secondary-btn {
+    margin-top: 24px;
+    background-color: #475569;
+}
+
+.secondary-btn:hover {
+    background-color: #334155;
+}
+
 .success {
     color: #16a34a;
 }
